@@ -19,7 +19,7 @@ public:
     Drum(const Drum &other);
     [[nodiscard]] const std::string &getNume() const;
     [[nodiscard]] double getLungime() const;
-    [[nodiscard]] std::string pretty_print_lungime() const;
+    [[nodiscard]] std::string pretty_print_cost() const;
     [[nodiscard]] std::size_t getTronsoane() const;
     void add_contract(const Contract &c, std::size_t tronson);
     [[nodiscard]] bool tronson_are_contract(std::size_t tronson) const;

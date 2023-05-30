@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 #include "Drum.h"
 #include "DrumNational.h"
@@ -16,6 +17,11 @@ void println(const std::string &str) {
     std::cout<<str<<'\n';
 }
 
+void trim_newline(std::string &str) {
+    while(str.ends_with('\n') || str.ends_with('\r'))
+        str.pop_back();
+}
+
 int main() {
     std::vector<std::unique_ptr<Drum>> drumuri;
     std::size_t nr_drumuri;
@@ -28,6 +34,7 @@ int main() {
             std::size_t tronsoane;
             println("Te rog, introdu nume, lungime si nr. tronsoane.");
             std::cin >> nume >> lungime >> tronsoane;
+            trim_newline(nume);
             std::string tip_drum;
             print("Tip drum (DN | DE | A | DEA) = ");
             std::cin >> tip_drum;
@@ -63,11 +70,45 @@ int main() {
             std::size_t tronson;
             println("Te rog, introdu numele companiei, CIF si nr. tronsonului pentru care este contractul.");
             std::cin >> companie >> CIF >> tronson;
+            trim_newline(companie);
+            trim_newline(CIF);
             drumuri.back()->add_contract(Contract{companie, CIF}, tronson);
         }
     }
-    for(const auto &d : drumuri) {
-        std::cout << d->getNume() << " costa " << d->pretty_print_lungime() << '\n';
+    {
+        double lungime_totala = 0, lungime_autostrazi = 0;
+        for (const auto &d: drumuri) {
+            lungime_totala += d->getLungime();
+            auto *a = dynamic_cast<Autostrada *>(&*d);
+            if (a) {
+                lungime_autostrazi += a->getLungime();
+            }
+        }
+        println("Lungimea totala = " + std::to_string(lungime_totala) + " km");
+        println("Lungimea autostrazilor = " + std::to_string(lungime_autostrazi) + " km");
+    }
+    {
+        std::string CIF_reziliat;
+        print("CIF de reziliat = ");
+        std::cin >> CIF_reziliat;
+        trim_newline(CIF_reziliat);
+        for (auto &d: drumuri) {
+            d->delete_CIF(CIF_reziliat);
+        }
+    }
+    {
+        std::string nume_drum;
+        print("Nume drum de calculat costul total = ");
+        std::cin >> nume_drum;
+        trim_newline(nume_drum);
+        const auto drum = std::find_if(drumuri.begin(), drumuri.end(), [&nume_drum] (const auto &d) -> bool {
+            return d->getNume() == nume_drum;
+        });
+        if(drum == drumuri.end()) {
+            println("Drumul nu a fost gasit!");
+        } else {
+            println("Cost total al drumului = " + (*drum)->pretty_print_cost());
+        }
     }
     return 0;
 }

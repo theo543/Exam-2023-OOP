@@ -18,7 +18,7 @@ double Drum::getLungime() const {
     return lungime;
 }
 
-std::string Drum::pretty_print_lungime() const {
+std::string Drum::pretty_print_cost() const {
     double milione_euro = this->total_cost() / 1000;
     return std::to_string(milione_euro) + " milioane Euro";
 }
@@ -34,12 +34,13 @@ Drum::Drum(std::string nume, double lungime, std::size_t tronsoane) : nume(std::
 Drum::Drum(const Drum &other) : nume(other.nume), lungime(other.lungime), tronsoane(other.tronsoane), contracte(tronsoane, std::nullopt) {}
 
 void Drum::add_contract(const Contract &c, std::size_t tronson) {
-    if(contracte[tronson].has_value()) throw std::invalid_argument("Tronson " + std::to_string(tronson) + " deja are contract!");
+    tronson--;
+    if(contracte.at(tronson).has_value()) throw std::invalid_argument("Tronson " + std::to_string(tronson) + " deja are contract!");
     contracte[tronson] = c;
 }
 
 bool Drum::tronson_are_contract(std::size_t tronson) const {
-    return contracte[tronson].has_value();
+    return contracte.at(tronson).has_value();
 }
 
 void Drum::delete_CIF(const std::string &CIF) {
@@ -55,7 +56,7 @@ double Drum::total_cost() const {
     double lungime_tronson = lungime / static_cast<double>(tronsoane);
     for(auto &c : contracte) {
         if(!c.has_value()) continue;
-        total += this->coeficient_cost_de_baza() * lungime_tronson + this->cost_extra();
+        total += static_cast<double>(this->coeficient_cost_de_baza()) * lungime_tronson + static_cast<double>(this->cost_extra());
     }
     return total;
 }

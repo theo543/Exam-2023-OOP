@@ -1,0 +1,16 @@
+2
+D1 100 10
+DEA
+10
+20
+3
+AutoRomania AR1 2
+BuildEuropa BE3 5
+AutoRomania AR1 4
+D2 10 1
+DE
+10
+1
+BucurestiAuto BA3 1
+AR1
+D2

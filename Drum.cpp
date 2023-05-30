@@ -10,6 +10,23 @@ std::size_t Drum::cost_extra() const {
     return 0;
 }
 
+const std::string &Drum::getNume() const {
+    return nume;
+}
+
+double Drum::getLungime() const {
+    return lungime;
+}
+
+std::string Drum::pretty_print_lungime() const {
+    double milione_euro = this->total_cost() / 1000;
+    return std::to_string(milione_euro) + " milioane Euro";
+}
+
+std::size_t Drum::getTronsoane() const {
+    return tronsoane;
+}
+
 Drum::Drum(std::string nume, double lungime, std::size_t tronsoane) : nume(std::move(nume)), lungime(lungime), tronsoane(tronsoane), contracte(tronsoane, std::nullopt) {
     if(tronsoane == 0) throw std::invalid_argument("Trebuie cel putin un tronson!");
 }

@@ -1,3 +1,10 @@
+/*
+ * Negrescu Theodor
+ * Grupa 151
+ * Clang++ 16.0.0
+ * Tutore MARIUS MICLUTA-CAMPEANU
+ */
+
 #ifndef CONTRACT
 #define CONTRACT
 

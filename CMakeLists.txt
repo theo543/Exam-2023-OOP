@@ -1,3 +1,8 @@
+# Negrescu Theodor
+# Grupa 151
+# Clang++ 16.0.0
+# Tutore MARIUS MICLUTA-CAMPEANU
+
 cmake_minimum_required(VERSION 3.26)
 project(Exam_2023_OOP)
 

@@ -9,4 +9,4 @@ if(SANITIZERS)
     set(CMAKE_CXX_FLAGS -fsanitize=address,undefined,leak)
 endif()
 
-add_executable(Exam_2023_OOP main.cpp)
+add_executable(Exam_2023_OOP main.cpp Drum.h Contract.h Contract.cpp Drum.cpp DrumNational.cpp DrumNational.h DrumEuropean.cpp DrumEuropean.h Autostrada.cpp Autostrada.h DrumEuropeanAutostrada.cpp DrumEuropeanAutostrada.h)

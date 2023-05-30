@@ -1,0 +1,8 @@
+Clang 16.0.0
+C++20
+
+C:\Users\THEO\CLionProjects\Exam-2023-OOP [main]> clang --version
+(built by Brecht Sanders) clang version 16.0.0
+Target: x86_64-w64-windows-gnu
+Thread model: posix
+InstalledDir: C:/mingw64/bin
